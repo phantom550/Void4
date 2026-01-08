@@ -1,19 +1,11 @@
 :root {
-
-    --primary-color: #6366f1;
-
+    --primary-color: rgb(255, 128, 192);
     --primary-hover: #4f46e5;
-
     --card-bg: #ffffff;
-
     --text-main: #111827;
-
     --text-muted: #6b7280;
-
     --border-color: #e5e7eb;
-
     --input-bg: #f9fafb;
-
 }
 
 
@@ -203,8 +195,7 @@ body {
 
     background-color: var(--primary-color);
 
-    color: #ffffff;
-
+    color: rgb(255, 128, 192);
     border: none;
 
     border-radius: 6px;

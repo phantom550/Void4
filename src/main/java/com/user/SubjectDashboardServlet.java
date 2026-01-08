@@ -15,6 +15,7 @@ public class SubjectDashboardServlet extends HttpServlet {
             throws ServletException, IOException {
 
         List<Map<String, String>> videos = new ArrayList<>();
+        List<Map<String, String>> notice = new ArrayList<>();
 
         String subject = (String) req.getAttribute("subject");
 
@@ -38,17 +39,38 @@ public class SubjectDashboardServlet extends HttpServlet {
                 video.put("url", rs.getString("video_url"));
                 videos.add(video);
             }
+            
+            String sql1 = "SELECT * FROM notices WHERE subject=?";
+            PreparedStatement ps1 = con.prepareStatement(sql1);
+            ps1.setString(1, subject);
+
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+                Map<String, String> notices = new HashMap<>();
+                notices.put("description", rs1.getString("description"));
+                notices.put("date", rs1.getString("created_date"));
+                notice.add(notices);
+            }
 
             rs.close();
             ps.close();
+            rs1.close();
+            ps1.close();
             con.close();
+            
+            
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Send data to JSP
         req.setAttribute("videos", videos);
-        req.getRequestDispatcher("subjectdashboard.jsp").forward(req, res);
+       
+        
+        req.setAttribute("notice",notice);
+        req.setAttribute("subject",subject);
+        
+        req.getRequestDispatcher("subjectdashboard.jsp").forward(req,res);
     }
 }

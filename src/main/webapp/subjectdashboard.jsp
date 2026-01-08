@@ -23,19 +23,20 @@
 
 <div class="main-container">
 
+
     <!-- Sidebar -->
     <aside class="sidebar">
         <h3>Grades</h3>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=1'">1<sup>st</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=2'">2<sup>nd</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=3'">3<sup>rd</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=4'">4<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=5'">5<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=6'">6<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=7'">7<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=8'">8<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=9'">9<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?classId=10'">10<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=1'">1<sup>st</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=2'">2<sup>nd</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=3'">3<sup>rd</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=4'">4<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=5'">5<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=6'">6<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=7'">7<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=8'">8<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=9'">9<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=10'">10<sup>th</sup> Std</button>
     </aside>
 
     <!-- Content Area -->
@@ -62,7 +63,7 @@
         </video>
     </div>
 
-    <div class="video-info">
+<div class="video-info">
         <h4><%= video.get("title") %></h4>
 
         <a href="<%= video.get("url") %>" target="_blank" class="video-link">
@@ -86,16 +87,27 @@
         <!-- Notices Section -->
         <section class="notices-section">
             <h2 class="section-header">Important Notices</h2>
+             <%
+                    List<Map<String, String>> notice =
+                            (List<Map<String, String>>) request.getAttribute("notice");
 
+                    if (notice != null && !notice.isEmpty()) {
+                        for (Map<String, String> notices : notice) {
+                %>
             <div class="notice-card">
-                <span>Exam schedule for Term 1 released.</span>
-                <span>Oct 24, 2023</span>
+                <span><%= notices.get("description") %></span>
+                <span><%= notices.get("date") %></span>
             </div>
-
-            <div class="notice-card">
-                <span>Holiday declared for Deepavali.</span>
-                <span>Oct 22, 2023</span>
-            </div>
+  
+                <%
+                        }
+                    } else {
+                %>
+                    <p>No notices available.</p>
+                <%
+                    }
+                %>
+           
         </section>
 
     </main>

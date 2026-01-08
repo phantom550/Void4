@@ -11,7 +11,8 @@ import java.io.IOException;
 public class ClassesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		 String classId = req.getParameter("classId");
-		System.out.println("aisha"+classId);
+		 String subject = req.getParameter("subject");
+		System.out.println("Aisha"+" "+"Topped class"+classId+" "+subject);
 	}
 
 	
