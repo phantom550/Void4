@@ -1,0 +1,212 @@
+@charset "UTF-8";
+/* 
+    File: dashboard.css
+    Project: Teacher Training Portal (Hackathon)
+    Description: Contains all styling rules for the dashboard layout, navigation, and components.
+*/
+
+/* --- General Reset --- */
+/* Resets default browser margins and padding, sets box-sizing to border-box for easier layout management, and sets the default font family. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sets the body to take full viewport height and uses flexbox for vertical layout (header + main content). Prevents scroll on body itself. */
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- 1. Navigation Bar --- */
+/* Styles the top navigation bar with a dark background, white text, and flexbox for alignment. */
+nav {
+    height: 60px;
+    background-color: #2c3e50;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Styles the subject text in the navbar. */
+.nav-subject {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Container for the user profile section in the navbar. */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Styles the profile image as a circle with a border. */
+.profile-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #bdc3c7;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+/* --- Main Layout Container --- */
+/* Container for the sidebar and content area, taking up the remaining height below the navbar. */
+.main-container {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 60px);
+}
+
+/* --- 2. Left Part (Sidebar) --- */
+/* Styles the sidebar with a light background, fixed width, and vertical scrolling if needed. */
+.sidebar {
+    width: 200px; /* Slimmer sidebar for class numbers */
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Styles the headers within the sidebar. */
+.sidebar h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Styles the buttons for selecting classes/grades. Includes hover effects. */
+.class-btn {
+    padding: 12px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center; /* Centered for standard numbers */
+    transition: all 0.2s ease;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.class-btn:hover {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+    transform: translateX(5px);
+}
+
+/* --- 3. Right Part (Content Area) --- */
+/* The main content area to the right of the sidebar. Uses flexbox to stack sections vertically. */
+.content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Section for displaying videos/resources. Takes up available space and scrolls if content overflows. */
+.video-section {
+    flex: 1;
+    padding: 20px;
+    border-bottom: 2px solid #ddd;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+/* Header style for sections within the content area. */
+.section-header {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Container for the list of video cards. */
+.video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Styles individual video cards with a border and hover effect. */
+.video-card {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.video-card:hover {
+    background-color: #f8f9fa;
+    border-color: #3498db;
+}
+
+/* Placeholder box for video thumbnails. */
+.thumbnail-box {
+    width: 80px;
+    height: 45px;
+    background: #000;
+    border-radius: 4px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.6rem;
+    background-image: linear-gradient(45deg, #2c3e50, #3498db);
+}
+
+/* Styles the text info within a video card. */
+.video-info h4 {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* --- Right Bottom: Notices Section --- */
+/* Section for notices at the bottom of the content area. */
+.notices-section {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Styles individual notice cards with a left accent border. */
+.notice-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 4px solid #e74c3c;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Responsive Design */
+/* Adjusts layout for smaller screens (mobile/tablet). Stacks sidebar and content vertically. */
+@media (max-width: 768px) {
+    .main-container { flex-direction: column; }
+    .sidebar { width: 100%; height: 100px; flex-direction: row; border-bottom: 1px solid #ddd; }
+    .class-btn { min-width: 100px; }
+}
