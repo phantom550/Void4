@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,26 +29,27 @@
             </li>
             
             <li class="nav-item">
-                <a href="#" class="nav-link" onclick="openModal('issueModal')">
+                <a href="raiseissue.jsp?subject=<%= request.getAttribute("subject") %>&teacher_id=<%= request.getAttribute("teacher_id") %>&classId=<%= request.getAttribute("classId") %>&subject_id=<%= request.getAttribute("subject_id") %>" class="nav-link">
                     <span class="material-symbols-outlined">report_problem</span>
                     Raise Issue
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link" onclick="openModal('updateModal')">
+                <a href="addstudent.jsp?subject=<%= request.getAttribute("subject") %>&teacher_id=<%= request.getAttribute("teacher_id") %>&classId=<%= request.getAttribute("classId") %>&subject_id=<%= request.getAttribute("subject_id") %>" class="nav-link" onclick="openModal('updateModal')">
                     <span class="material-symbols-outlined">edit_document</span>
                     Update Data
                 </a>
             </li>
         </ul>
         
-        <div style="margin-top: auto; padding: 16px;">
-            <a href="#" class="nav-link" style="color: #B3261E;" onclick="logoutAction()">
-                <span class="material-symbols-outlined">logout</span>
-                Logout
-            </a>
-        </div>
+     <div style="margin-top: auto; padding: 16px;">
+    <a href="index.html" class="nav-link" style="color: #B3261E;">
+        <span class="material-symbols-outlined">logout</span>
+        Logout
+    </a>
+</div>
+
     </aside>
 
     <main class="main-content">
@@ -370,6 +372,20 @@
         %>
     ];
 </script>
+<script>
+    const performanceData = [
+        <c:forEach var="m" items="${performance}">
+            ${m},
+        </c:forEach>
+    ];
+
+    const studentNames = [
+        <c:forEach var="n" items="${studentNames}">
+            "${n}",
+        </c:forEach>
+    ];
+</script>
+
     
 
     <script src="classes.js"></script>

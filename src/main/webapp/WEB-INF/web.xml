@@ -47,6 +47,24 @@
       <url-pattern>/EditTeacherServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  <servlet-name>RaiseIssueServlet</servlet-name>
+     <servlet-class>RaiseIssueServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.RaiseIssueServlet</servlet-name>
+      <url-pattern>/RaiseIssueServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>AddStudent</servlet-name>
+     <servlet-class>AddStudent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.AddStudent</servlet-name>
+      <url-pattern>/AddStudent</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>

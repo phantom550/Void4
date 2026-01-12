@@ -32,6 +32,10 @@ public class ClassesServlet extends HttpServlet {
         List<Map<String, String>> notice = new ArrayList<>();
         ArrayList<Integer> attend = new ArrayList();
         ArrayList<Integer> beheviour = new ArrayList();
+        
+        ArrayList<Integer> perform = new ArrayList();
+        ArrayList<String> name = new ArrayList();
+        
         int low=0;
         int avg=0;
         int good=0;
@@ -150,7 +154,22 @@ public class ClassesServlet extends HttpServlet {
                   
                    }
                    
+                   String sql6 = "SELECT student_name,marks FROM students WHERE class_id=? and subject=?";
+                   PreparedStatement ps6 = con.prepareStatement(sql6);
+                   ps6.setInt(1, classI);
+                   ps6.setString(2, subject);
 
+                   ResultSet rs6 = ps6.executeQuery();
+                       
+                   while (rs6.next()) {
+                       
+                       perform.add(rs6.getInt("marks"));
+                       name.add(rs6.getString("student_name"));
+                       
+                   }
+
+                   rs6.close();
+                   ps6.close();
                    rs4.close();
                    ps4.close();
                    rs5.close();
@@ -186,6 +205,8 @@ public class ClassesServlet extends HttpServlet {
         req.setAttribute("low", low);
         req.setAttribute("avg", avg);
         req.setAttribute("good", good);
+        req.setAttribute("performance", perform);
+        req.setAttribute("name", name);
 
         RequestDispatcher rd = req.getRequestDispatcher("classes.jsp");
         rd.forward(req, res);

@@ -65,30 +65,39 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
-    var ctxPerformance = document.getElementById('performanceChart');
-    if(ctxPerformance) {
-        new Chart(ctxPerformance, {
-            type: 'bar',
-            data: {
-                labels: ['Math', 'Sci', 'Eng', 'His', 'Art'],
-                datasets: [{
-                    data: [8, 6, 9, 7, 8],
-                    backgroundColor: ['#ffb4ab', '#e6c8ad', '#80f0e0', '#a0c9ff', '#c4eed0'],
-                    borderRadius: 8,
-                    barThickness: 20
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: { 
-                    y: { display: false },
-                    x: { grid: { display: false } }
-                }
-            }
-        });
-    }
+	var ctxPerformance = document.getElementById('performanceChart');
+
+	if (ctxPerformance) {
+	    new Chart(ctxPerformance, {
+	        type: 'bar',
+	        data: {
+	            labels: studentNames,   // 👈 dynamic names
+	            datasets: [{
+	                label: 'Marks',
+	                data: performanceData, // 👈 dynamic marks
+	                backgroundColor: '#80f0e0',
+	                borderRadius: 8,
+	                barThickness: 22
+	            }]
+	        },
+	        options: {
+	            responsive: true,
+	            maintainAspectRatio: false,
+	            plugins: {
+	                legend: { display: false }
+	            },
+	            scales: {
+	                y: {
+	                    beginAtZero: true,
+	                    max: 100
+	                },
+	                x: {
+	                    grid: { display: false }
+	                }
+	            }
+	        }
+	    });
+	}
 
     // --- Chip Interaction ---
     var chips = document.querySelectorAll('.chip');

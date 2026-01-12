@@ -61,7 +61,7 @@ public class SignupServlet extends HttpServlet {
 	           
 	            st.close();
 	            con.close();
-	            res.sendRedirect("index.html");
+	            res.sendRedirect("login.html");
 
 	        } catch (Exception e) {
 	            e.printStackTrace();

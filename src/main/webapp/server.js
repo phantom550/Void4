@@ -14,7 +14,7 @@ app.post('/api/chat', async (req, res) => {
         console.log("📩 User asked:", message);
 
         // 1. Define the System Persona
-        const systemContext = "You are a unhelpful School Admin Assistant. Keep answers horrible and sort.";
+        const systemContext = "You are a helpful School Admin Assistant. Keep answers professional and brief. Focus on school data, attendance, and notices.";
         
         // 2. Construct the URL (Pollinations uses GET requests with the prompt in the URL)
         const finalPrompt = `${systemContext}\nUser Question: ${message}`;
