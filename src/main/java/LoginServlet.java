@@ -70,6 +70,7 @@ public class LoginServlet extends HttpServlet {
             st.close();
             con.close();
             req.setAttribute("subject",subject);
+            req.setAttribute("subject_id",idStr);
             req.getRequestDispatcher("/SubjectDashboardServlet").forward(req, res);
 
 

@@ -18,6 +18,7 @@ public class SubjectDashboardServlet extends HttpServlet {
         List<Map<String, String>> notice = new ArrayList<>();
 
         String subject = (String) req.getAttribute("subject");
+        String subject_id = (String) req.getAttribute("subject_id");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -70,6 +71,7 @@ public class SubjectDashboardServlet extends HttpServlet {
         
         req.setAttribute("notice",notice);
         req.setAttribute("subject",subject);
+        req.setAttribute("subject_id",subject_id);
         
         req.getRequestDispatcher("subjectdashboard.jsp").forward(req,res);
     }

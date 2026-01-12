@@ -1,0 +1,232 @@
+SHOW CREATE TABLE trainer_videos;
+
+
+
+
+        <section class="grid-3" style="margin-top: 24px;">
+            
+            <div class="stat-card">
+                <div class="list-row" style="border: none; padding: 0; margin-bottom: 16px;">
+                    <span class="title-medium">Recent Lessons</span>
+                    <span class="material-symbols-outlined">smart_display</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <div style="width: 80px; height: 50px; background: #EADDFF; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">play_circle</span>
+                        </div>
+                        <div>
+                            <div class="label-large">Algebra Intro</div>
+                            <div class="body-small" style="color: #666;">12 mins</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <div style="width: 80px; height: 50px; background: #EADDFF; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">play_circle</span>
+                        </div>
+                        <div>
+                            <div class="label-large">Linear Equations</div>
+                            <div class="body-small" style="color: #666;">18 mins</div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-tonal" style="width: 100%; margin-top: 16px;">Go to Library</button>
+            </div>
+
+            <div class="stat-card">
+                <div class="list-row" style="border: none; padding: 0; margin-bottom: 16px;">
+                    <span class="title-medium">Class Notices</span>
+                    <span class="material-symbols-outlined">campaign</span>
+                </div>
+                
+                <div class="list-row clickable-row" onclick="showNotice('Unit Test on Monday', 'Today', 'Chapters 4 and 5 will be covered. Please ensure students bring geometry boxes.')">
+                    <div>
+                         <span class="material-symbols-outlined" style="vertical-align: -6px; color: var(--md-sys-color-primary); margin-right: 4px; font-size: 20px;">push_pin</span>
+                        <span class="label-large">Unit Test on Monday</span>
+                    </div>
+                    <span class="body-small">Today</span>
+                </div>
+                
+                <div class="list-row clickable-row" onclick="showNotice('Submit Homework', 'Yesterday', 'Math workbook page 42-45 due by EOD. Late submissions will be marked.')">
+                    <div>
+                         <span class="material-symbols-outlined" style="vertical-align: -6px; color: #B3261E; margin-right: 4px; font-size: 20px;">warning</span>
+                        <span class="label-large">Submit Homework</span>
+                    </div>
+                    <span class="body-small">Yesterday</span>
+                </div>
+                
+                <div class="list-row clickable-row" style="border-bottom: none;" onclick="showNotice('Science Fair Info', 'Oct 25', 'Registration for the annual Science Fair starts next week. Encourage participation.')">
+                    <div>
+                         <span class="material-symbols-outlined" style="vertical-align: -6px; color: #666; margin-right: 2px; font-size: 20px;">event</span>
+                        <span class="label-large">Science Fair Info</span>
+                    </div>
+                    <span class="body-small">Oct 25</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="list-row" style="border: none; padding: 0; margin-bottom: 16px;">
+                    <span class="title-medium">AI Content Humanizer</span>
+                    <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">auto_awesome</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <p class="body-small" style="color: #666;">Refine AI-generated text for notices or emails.</p>
+                    <textarea id="aiInput" 
+                        style="border: 1px solid #79747E; border-radius: 8px; padding: 12px; resize: none; height: 80px; font-family: inherit; font-size: 14px; background: #fff;" 
+                        placeholder="Paste text here..."></textarea>
+                    
+                    <button type="button" id="humanizeBtn" onclick="callHumanizeApi()" class="btn-filled" style="width: 100%; justify-content: center;">
+                        <span class="material-symbols-outlined" style="margin-right: 8px;">magic_button</span> 
+                        <span id="btnText">Humanize</span>
+                    </button>
+
+                    <div id="aiResultContainer" style="display: none; background: var(--md-sys-color-surface-variant); padding: 12px; border-radius: 8px; margin-top: 8px;">
+                        <span class="label-large" style="color: var(--md-sys-color-primary);">Result:</span>
+                        <p id="aiResultText" class="body-medium" style="margin-top: 4px; font-size: 13px; line-height: 1.4;"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <%@ page import="java.util.List, java.util.Map" %>
+
+<section class="grid-3" style="margin-top: 24px;">
+
+    <!-- ================= RECENT LESSONS ================= -->
+    <div class="stat-card">
+        <div class="list-row" style="border: none; padding: 0; margin-bottom: 16px;">
+            <span class="title-medium">Recent Lessons</span>
+            <span class="material-symbols-outlined">smart_display</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            <%
+                List<Map<String, String>> videos =
+                        (List<Map<String, String>>) request.getAttribute("videos");
+
+                if (videos != null && !videos.isEmpty()) {
+                    for (Map<String, String> video : videos) {
+            %>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <div style="width: 80px; height: 50px; background: #EADDFF;
+                            border-radius: 8px; display: flex;
+                            align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined"
+                          style="color: var(--md-sys-color-primary);">
+                        play_circle
+                    </span>
+                </div>
+
+                <div>
+                    <div class="label-large">
+                        <%= video.get("title") %>
+                    </div>
+
+                    <video width="220" controls style="margin-top: 6px; border-radius: 6px;">
+                        <source src="<%= video.get("url") %>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <%
+                    }
+                } else {
+            %>
+                <p class="body-small" style="color:#666;">No lessons available</p>
+            <%
+                }
+            %>
+        </div>
+
+        <button type="button" class="btn-tonal"
+                style="width: 100%; margin-top: 16px;">
+            Go to Library
+        </button>
+    </div>
+
+    <!-- ================= CLASS NOTICES ================= -->
+    <div class="stat-card">
+        <div class="list-row" style="border: none; padding: 0; margin-bottom: 16px;">
+            <span class="title-medium">Class Notices</span>
+            <span class="material-symbols-outlined">campaign</span>
+        </div>
+
+        <div class="list-row clickable-row"
+             onclick="showNotice('Unit Test on Monday','Today',
+             'Chapters 4 and 5 will be covered. Please ensure students bring geometry boxes.')">
+            <div>
+                <span class="material-symbols-outlined"
+                      style="vertical-align:-6px;color:var(--md-sys-color-primary);
+                             margin-right:4px;font-size:20px;">push_pin</span>
+                <span class="label-large">Unit Test on Monday</span>
+            </div>
+            <span class="body-small">Today</span>
+        </div>
+
+        <div class="list-row clickable-row"
+             onclick="showNotice('Submit Homework','Yesterday',
+             'Math workbook page 42-45 due by EOD.')">
+            <div>
+                <span class="material-symbols-outlined"
+                      style="vertical-align:-6px;color:#B3261E;
+                             margin-right:4px;font-size:20px;">warning</span>
+                <span class="label-large">Submit Homework</span>
+            </div>
+            <span class="body-small">Yesterday</span>
+        </div>
+
+        <div class="list-row clickable-row" style="border-bottom:none;"
+             onclick="showNotice('Science Fair Info','Oct 25',
+             'Registration for the annual Science Fair starts next week.')">
+            <div>
+                <span class="material-symbols-outlined"
+                      style="vertical-align:-6px;color:#666;
+                             margin-right:2px;font-size:20px;">event</span>
+                <span class="label-large">Science Fair Info</span>
+            </div>
+            <span class="body-small">Oct 25</span>
+        </div>
+    </div>
+
+    <!-- ================= AI HUMANIZER ================= -->
+    <div class="stat-card">
+        <div class="list-row" style="border: none; padding: 0; margin-bottom: 16px;">
+            <span class="title-medium">AI Content Humanizer</span>
+            <span class="material-symbols-outlined"
+                  style="color: var(--md-sys-color-primary);">auto_awesome</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <p class="body-small" style="color: #666;">
+                Refine AI-generated text for notices or emails.
+            </p>
+
+            <textarea id="aiInput"
+                      style="border:1px solid #79747E;border-radius:8px;
+                             padding:12px;resize:none;height:80px;
+                             font-family:inherit;font-size:14px;"
+                      placeholder="Paste text here..."></textarea>
+
+            <button type="button" onclick="callHumanizeApi()"
+                    class="btn-filled" style="width:100%;">
+                <span class="material-symbols-outlined"
+                      style="margin-right:8px;">magic_button</span>
+                Humanize
+            </button>
+
+            <div id="aiResultContainer"
+                 style="display:none;background:var(--md-sys-color-surface-variant);
+                        padding:12px;border-radius:8px;">
+                <span class="label-large"
+                      style="color:var(--md-sys-color-primary);">Result:</span>
+                <p id="aiResultText"
+                   class="body-medium"
+                   style="margin-top:4px;font-size:13px;"></p>
+            </div>
+        </div>
+    </div>
+
+</section>

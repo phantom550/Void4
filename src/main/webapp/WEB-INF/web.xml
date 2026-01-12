@@ -38,6 +38,15 @@
       <url-pattern>/ClassesServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  <servlet-name>EditTeacherServlet</servlet-name>
+     <servlet-class>EditTeacherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.EditTeacherServlet</servlet-name>
+      <url-pattern>/EditTeacherServlet</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>

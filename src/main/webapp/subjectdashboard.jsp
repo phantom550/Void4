@@ -13,9 +13,9 @@
 
 <!-- Navigation Bar -->
 <nav>
-    <div class="nav-subject">Subject: Placeholder</div>
+    <div class="nav-subject">Subject: <%= request.getAttribute("subject") %></div>
     <div class="profile-container">
-        <span>Welcome, User</span>
+        <span>User Id : <%= request.getAttribute("subject_id") %></span>
         <img src="https://ui-avatars.com/api/?name=Teacher+User&background=random"
              alt="Profile" class="profile-photo">
     </div>
@@ -27,16 +27,16 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <h3>Grades</h3>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=1'">1<sup>st</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=2'">2<sup>nd</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=3'">3<sup>rd</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=4'">4<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=5'">5<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=6'">6<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=7'">7<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=8'">8<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=9'">9<sup>th</sup> Std</button>
-        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&classId=10'">10<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=1'">1<sup>st</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=2'">2<sup>nd</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=3'">3<sup>rd</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=4'">4<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=5'">5<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=6'">6<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=7'">7<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=8'">8<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=9'">9<sup>th</sup> Std</button>
+        <button class="class-btn" onclick="location.href='ClassesServlet?subject=<%= request.getAttribute("subject") %>&subject_id=<%= request.getAttribute("subject_id") %>&classId=10'">10<sup>th</sup> Std</button>
     </aside>
 
     <!-- Content Area -->
