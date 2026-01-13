@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="classes.css">
     
 </head>
-<body>
+<body> 
 
     <div class="scrim"></div>
 
@@ -242,29 +242,29 @@
     <!-- ================= AI HUMANIZER ================= -->
    <div class="stat-card" style="background: linear-gradient(135deg, #d1e4ff 0%, #fdfcff 100%); border: 1px solid #0061a4;">
 
-                <div class="list-row" style="border:none; padding:0; margin-bottom:12px;">
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ <div class="list-row" style="border:none; padding:0; margin-bottom:12px;">
 
-                    <span style="font-weight:500; color:#001d36; font-size:18px;">AI Assistant</span>
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ <span style="font-weight:500; color:#001d36; font-size:18px;">AI Assistant</span>
 
-                    <span class="material-symbols-outlined" style="color:#0061a4;">smart_toy</span>
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ <span class="material-symbols-outlined" style="color:#0061a4;">smart_toy</span>
 
-                </div>
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ </div>
 
-                <p style="font-size:13px; color:#001d36; margin-bottom:24px;">
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ <p style="font-size:13px; color:#001d36; margin-bottom:24px;">
 
-                    Need help analyzing student data or finding notices? Use the new AI workspace.
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ Need help analyzing student data or finding notices? Use the new AI workspace.
 
-                </p>
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ </p>
 
-                <button type="button" onclick="window.location.href='chat.html'" class="btn-filled" style="width:100%;">
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ <button type="button" onclick="window.location.href='chat.html'" class="btn-filled" style="width:100%;">
 
-                    <span class="material-symbols-outlined" style="margin-right:8px;">open_in_new</span>
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ <span class="material-symbols-outlined" style="margin-right:8px;">open_in_new</span>
 
-                    Launch Workspace
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ Launch Workspace
 
-                </button>
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ </button>
 
-            </div>
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ </div>
 
 </section>
 
