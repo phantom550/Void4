@@ -357,7 +357,7 @@
             </div>
         </div>
     </div><script>
-    // Attendance data coming from servlet
+    // Attendance data coming from 
     var attendanceData = [
         <%
             List<Integer> attend =
@@ -389,5 +389,6 @@
     
 
     <script src="classes.js"></script>
+   
 </body>
 </html>
