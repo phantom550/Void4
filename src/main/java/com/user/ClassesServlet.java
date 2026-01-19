@@ -10,6 +10,7 @@ import jakarta.servlet.RequestDispatcher;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,11 @@ public class ClassesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
+    	req.setCharacterEncoding("UTF-8");
+        res.setContentType("text/html; charset=UTF-8");
+
+        
+    	
         String classId = req.getParameter("classId");
         String subject = req.getParameter("subject");
         String subject_i = req.getParameter("subject_id");
@@ -50,18 +56,47 @@ public class ClassesServlet extends HttpServlet {
         String tname=null;
          java.sql.Date jDate = null;
          String sub = null ;
+         String cluster=null;
          int total=0;
         String m="math";
 
         System.out.println("Aisha topped class " + classId + " in " + subject+" "+subject_id);
-        	   
-        	   try {
-                   Class.forName("com.mysql.cj.jdbc.Driver");
-                   Connection con = DriverManager.getConnection(
-                           "jdbc:mysql://localhost:3306/void4",
-                           "root",
-                           "root"
-                   );
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // --- CONNECTION LOGIC START ---
+            
+            // A. Check for Cloud Environment Variables (Koyeb)
+            String envUrl = System.getenv("DB_URL");
+            String envUser = System.getenv("DB_USER");
+            String envPass = System.getenv("DB_PASSWORD");
+
+            String dbUrl, dbUser, dbPass;
+
+            if (envUrl != null) {
+                // We are on the Cloud (Koyeb)
+                dbUrl = envUrl;
+                dbUser = envUser;
+                dbPass = envPass;
+            } else {
+                // We are on Localhost -> Use the Aiven credentials directly
+                // Note: The URL is reformatted to valid JDBC syntax
+            	dbUrl = "jdbc:mysql://localhost:3306/void4"; 
+                dbUser = "root";
+                dbPass = "root"; // Your LOCAL password, not the Aiven one
+            }
+
+            // B. Establish Connection
+            con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+
+            // --- CONNECTION LOGIC END ---
+
+            // --- DIAGNOSTIC: Check which DB we are connected to ---
+            DatabaseMetaData meta = con.getMetaData();
+            String connectedUrl = meta.getURL();
+            String connectedUser = meta.getUserName();
+            System.out.println(">>> CONNECTED TO: " + connectedUrl); // Prints to Server Logs
 
                    String sql = "SELECT title, video_url FROM videos WHERE subject_id=? and class_id=? and school_id=?";
                    PreparedStatement ps = con.prepareStatement(sql);
@@ -107,7 +142,7 @@ public class ClassesServlet extends HttpServlet {
                        
                    }
                    
-                   String sql3 = "SELECT name,teacher_id,email,joined_date,subject FROM teachers WHERE class_id=? and subject=? and school_id=?";
+                   String sql3 = "SELECT name,teacher_id,email,joined_date,subject,clusterFROM teachers WHERE class_id=? and subject=? and school_id=?";
                    PreparedStatement ps3 = con.prepareStatement(sql3);
                    ps3.setInt(1, classI);
                    ps3.setString(2, subject);

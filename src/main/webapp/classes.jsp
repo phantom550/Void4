@@ -1,5 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="classes.css">
-    
 </head>
 <body>
 
@@ -60,16 +59,16 @@
                     <span class="material-symbols-outlined">menu</span>
                 </button>
                 <div class="chips-container" style="margin-bottom: 0;">
-                    <button type="button" class="chip active">Class 1</button>
-                    <button type="button" class="chip">Class 2</button>
-                    <button type="button" class="chip">Class 3</button>
-                    <button type="button" class="chip">Class 4</button>
-                    <button type="button" class="chip">Class 5</button>
-                    <button type="button" class="chip">Class 6</button>
-                    <button type="button" class="chip">Class 7</button>
-                    <button type="button" class="chip">Class 8</button>
-                    <button type="button" class="chip">Class 9</button>
-                    <button type="button" class="chip">Class 10</button>
+                    <button type="button" class="chip active">English</button>
+                    <button type="button" class="chip">Hindi</button>
+                    <button type="button" class="chip">Marathi</button>
+                    <button type="button" class="chip">Tamil</button>
+                    <button type="button" class="chip">Telugu</button>
+                    <button type="button" class="chip">Urdu</button>
+                    <button type="button" class="chip">Gujarati</button>
+                    <button type="button" class="chip">Kannada</button>
+                    <button type="button" class="chip">Malayalam</button>
+                    <button type="button" class="chip">Bengali</button>
                 </div>
             </div>
             <span class="material-symbols-outlined" style="cursor: pointer; flex-shrink: 0;">notifications</span>
@@ -242,29 +241,29 @@
     <!-- ================= AI HUMANIZER ================= -->
    <div class="stat-card" style="background: linear-gradient(135deg, #d1e4ff 0%, #fdfcff 100%); border: 1px solid #0061a4;">
 
-                <div class="list-row" style="border:none; padding:0; margin-bottom:12px;">
+Â  Â  Â  Â  Â  Â  Â  Â  <div class="list-row" style="border:none; padding:0; margin-bottom:12px;">
 
-                    <span style="font-weight:500; color:#001d36; font-size:18px;">AI Assistant</span>
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  <span style="font-weight:500; color:#001d36; font-size:18px;">AI A ssistant</span>
 
-                    <span class="material-symbols-outlined" style="color:#0061a4;">smart_toy</span>
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  <span class="material-symbols-outlined" style="color:#0061a4;">smart_toy</span>
 
-                </div>
+Â  Â  Â  Â  Â  Â  Â  Â  </div>
 
-                <p style="font-size:13px; color:#001d36; margin-bottom:24px;">
+Â  Â  Â  Â  Â  Â  Â  Â  <p style="font-size:13px; color:#001d36; margin-bottom:24px;">
 
-                    Need help analyzing student data or finding notices? Use the new AI workspace.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Need help analyzing student data or finding notices? Use the new AI workspace.
 
-                </p>
+Â  Â  Â  Â  Â  Â  Â  Â  </p>
 
-                <button type="button" onclick="window.location.href='chat.html'" class="btn-filled" style="width:100%;">
+Â  Â  Â  Â  Â  Â  Â  Â  <button type="button" onclick="window.location.href='chat.html'" class="btn-filled" style="width:100%;">
 
-                    <span class="material-symbols-outlined" style="margin-right:8px;">open_in_new</span>
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  <span class="material-symbols-outlined" style="margin-right:8px;">open_in_new</span>
 
-                    Launch Workspace
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Launch Workspace
 
-                </button>
+Â  Â  Â  Â  Â  Â  Â  Â  </button>
 
-            </div>
+Â  Â  Â  Â  Â  Â  </div>
 
 </section>
 
@@ -295,6 +294,10 @@
                 <div class="info-row">
                     <span style="font-weight: 500;">Primary Subject</span>
                     <span><%= request.getAttribute("sub") %></span>
+                </div>
+                <div class="info-row">
+                    <span style="font-weight: 500;">Cluster</span>
+                    <span><%= request.getAttribute("cluster") %></span>
                 </div>
             </div>
             
@@ -360,8 +363,8 @@
     // Attendance data coming from servlet
     var attendanceData = [
         <%
-            List<Integer> attend =
-                    (List<Integer>) request.getAttribute("attend");
+            java.util.List<Integer> attend =
+                    (java.util.List<Integer>) request.getAttribute("attend");
 
             if (attend != null) {
                 for (int i = 0; i < attend.size(); i++) {
@@ -371,25 +374,12 @@
             }
         %>
     ];
-</script>
-<script>
-    const performanceData = [
-        <c:forEach var="m" items="${performance}">
-            ${m},
-        </c:forEach>
-    ];
 
-    const studentNames = [
-        <c:forEach var="n" items="${studentNames}">
-            "${n}",
-        </c:forEach>
-    ];
-</script>
-<script>
-    var performance = [
+    // Renamed variable to avoid conflict with window.performance
+    var performanceData = [
         <%
-            List<Integer> perform =
-                (List<Integer>) request.getAttribute("perform");
+            java.util.List<Integer> perform =
+                (java.util.List<Integer>) request.getAttribute("performance");
 
             if (perform != null) {
                 for (int i = 0; i < perform.size(); i++) {
@@ -400,11 +390,10 @@
         %>
     ];
 
-    var studentNames = [
+    var student = [
         <%
-            List<String> studentName =
-                (List<String>) request.getAttribute("sname");
-
+            java.util.List<String> studentName =
+                (java.util.List<String>) request.getAttribute("sname");
             if (studentName != null) {
                 for (int i = 0; i < studentName.size(); i++) {
                     out.print("\"" + studentName.get(i) + "\"");
@@ -415,9 +404,6 @@
     ];
 </script>
 
-
-    
-
-    <script src="classes.js"></script>
+<script src="classes.js"></script>
 </body>
 </html>

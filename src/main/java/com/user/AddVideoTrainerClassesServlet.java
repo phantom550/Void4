@@ -1,11 +1,12 @@
 package com.user;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -13,36 +14,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-@WebServlet("/SignupServlet")
-public class SignupServlet extends HttpServlet {
 
-	 @Override
-	    public void service(HttpServletRequest req, HttpServletResponse res)
-	            throws ServletException, IOException {
-		 res.setContentType("text/html");
-
-	        String idStr = req.getParameter("id");
-	        String password = req.getParameter("password");
-	        String subject=req.getParameter("subject");
-	        String schoolid = req.getParameter("school_id");
-	        String school_name = req.getParameter("school_name");
-	        int school_id=Integer.parseInt(schoolid);
-
-	        // Validation
-	        if (idStr == null || idStr.isEmpty() ||
-	            password == null || password.isEmpty()) {
-
-	            res.getWriter().println("ID and Password are required");
-	            return;
-	        }
-
-	        int id;
-	        try {
-	            id = Integer.parseInt(idStr);
-	        } catch (NumberFormatException e) {
-	            res.getWriter().println("ID must be a number");
-	            return;
-	        }
+@WebServlet("/AddVideoTrainerClassesServlet")
+public class AddVideoTrainerClassesServlet extends HttpServlet {
+	
+	
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		String title = req.getParameter("video_title");
+		String url = req.getParameter("video_url");
+		String video_subject = req.getParameter("video_subject");
+		
+		 HttpSession session = req.getSession(false);
+	        Integer school_id = (Integer) session.getAttribute("school_id");
+	        String school_name = (String) session.getAttribute("school_name");
+	        Integer subject_id = (Integer) session.getAttribute("subject_id");
+	        String subject = (String) session.getAttribute("subject_name");
 	        Connection con = null;
 	        try {
 	            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -79,29 +66,39 @@ public class SignupServlet extends HttpServlet {
 	            String connectedUrl = meta.getURL();
 	            String connectedUser = meta.getUserName();
 	            System.out.println(">>> CONNECTED TO: " + connectedUrl); // Prints to Server Logs
+		          
+		          String sql1 = "INSERT INTO trainer_videos "
+		                    + "(subject , title, video_url, school_id, school_name) "
+		                    + "VALUES (?, ?, ?, ?, ?)";
+		          PreparedStatement st1 = con.prepareStatement(sql1);
+		          
+		          st1.setString(1,subject);
+		          st1.setString(2,title);
+		          st1.setString(3,url);
+		          st1.setInt(4,school_id);
+		          st1.setString(5,school_name);
+		          st1.executeUpdate();
+		          
 
-	            String sql = "insert into login values(?,?,?,?,?)";
-	            PreparedStatement st = con.prepareStatement(sql);
-	            st.setInt(1, id);
-	            st.setString(2, password);
-	            st.setString(3, subject);
-	            st.setInt(4, school_id);
-	            st.setString(5, school_name);
+		       
+		        
+		        
+		      
+		        st1.close();
+		         con.close();
 
 
+		    } 
+		    catch (Exception e) {
+		        e.printStackTrace();
+		    }
+	        
+	        req.getRequestDispatcher("TrainerSubjectDashboardServlet")
+	           .forward(req, res);		
+	}
 
-
-	           st.executeUpdate();
-
-	           
-	            st.close();
-	            con.close();
-	            res.sendRedirect("login.html");
-
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            res.getWriter().println("Database Error");
-	        }
-	 }
-	 
 }
+
+
+
+

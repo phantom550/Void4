@@ -65,6 +65,73 @@
       <url-pattern>/AddStudent</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+  <servlet-name>TrainerSignupServlet</servlet-name>
+     <servlet-class>TrainerSignupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.TrainerSignupServlet</servlet-name>
+      <url-pattern>/TrainerSignupServlet</url-pattern>
+  </servlet-mapping>
+  
+     <servlet>
+  <servlet-name>TrainerSubjectDashboardServlet</servlet-name>
+     <servlet-class>TrainerSubjectDashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.TrainerSubjectDashboardServlet</servlet-name>
+      <url-pattern>/TrainerSubjectDashboardServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>AddVideosTrainerDashboardServlet</servlet-name>
+     <servlet-class>AddVideosTrainerDashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.AddVideosTrainerDashboardServlet</servlet-name>
+      <url-pattern>/AddVideosTrainerDashboardServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>AddNoticesTrainerDashboardServlet</servlet-name>
+     <servlet-class>AddNoticesTrainerDashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.AddNoticesTrainerDashboardServlet</servlet-name>
+      <url-pattern>/AddNoticesTrainerDashboardServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>TrainerClassesServlet</servlet-name>
+     <servlet-class>TrainerClassesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.TrainerClassesServlet</servlet-name>
+      <url-pattern>/TrainerClassesServlet</url-pattern>
+  </servlet-mapping>
+  
+     <servlet>
+  <servlet-name>GetIssueServlet</servlet-name>
+     <servlet-class>GetIssueServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.GetIssueServlet</servlet-name>
+      <url-pattern>/GetIssueServlet</url-pattern>
+  </servlet-mapping>
+  
+       <servlet>
+  <servlet-name>EditTrainerServlet</servlet-name>
+     <servlet-class>EditTrainerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>com.user.EditTrainerServlet</servlet-name>
+      <url-pattern>/EditTrainerServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+ 
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>

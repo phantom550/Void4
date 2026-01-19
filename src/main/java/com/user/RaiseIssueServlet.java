@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,15 +38,43 @@ public class RaiseIssueServlet extends HttpServlet {
         int school_id = (int) session.getAttribute("school_id");
         String school_name = (String) session.getAttribute("school_name");
         
-        
+        Connection con = null;
         // Convert to int
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/void4",
-                    "root",
-                    "root"
-            );
+
+            // --- CONNECTION LOGIC START ---
+            
+            // A. Check for Cloud Environment Variables (Koyeb)
+            String envUrl = System.getenv("DB_URL");
+            String envUser = System.getenv("DB_USER");
+            String envPass = System.getenv("DB_PASSWORD");
+
+            String dbUrl, dbUser, dbPass;
+
+            if (envUrl != null) {
+                // We are on the Cloud (Koyeb)
+                dbUrl = envUrl;
+                dbUser = envUser;
+                dbPass = envPass;
+            } else {
+                // We are on Localhost -> Use the Aiven credentials directly
+                // Note: The URL is reformatted to valid JDBC syntax
+            	dbUrl = "jdbc:mysql://localhost:3306/void4"; 
+                dbUser = "root";
+                dbPass = "root"; // Your LOCAL password, not the Aiven one
+            }
+
+            // B. Establish Connection
+            con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+
+            // --- CONNECTION LOGIC END ---
+
+            // --- DIAGNOSTIC: Check which DB we are connected to ---
+            DatabaseMetaData meta = con.getMetaData();
+            String connectedUrl = meta.getURL();
+            String connectedUser = meta.getUserName();
+            System.out.println(">>> CONNECTED TO: " + connectedUrl); // Prints to Server Logs
 
             String sql = "INSERT INTO teacher_issues "
                     + "(teacher_id, subject_id, class_id, issue_description, category,school_id,school_name) "

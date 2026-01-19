@@ -2,8 +2,8 @@
 <%
     // 1. Retrieve parameters from the request
     // using a safe parsing approach to prevent errors if ID is missing
-    String tIdRaw = request.getParameter("teacher_id");
-    int teacher_id = (tIdRaw != null && !tIdRaw.isEmpty()) ? Integer.parseInt(tIdRaw) : 0;
+    String tIdRaw = request.getParameter("trainer_id");
+    int trainer_id = (tIdRaw != null && !tIdRaw.isEmpty()) ? Integer.parseInt(tIdRaw) : 0;
 
     String classId = request.getParameter("classId");
     String subject = request.getParameter("subject");
@@ -77,7 +77,7 @@
 <div class="m3-card">
     <h2>Edit Teacher</h2>
 
-    <form action="EditTeacherServlet" method="post">
+    <form action="EditTrainerServlet" method="post">
 
         <input type="hidden" name="classId" value="<%= (classId != null) ? classId : "" %>">
         <input type="hidden" name="subject" value="<%= (subject != null) ? subject : "" %>">
@@ -88,12 +88,12 @@
                 <span class="mdc-notched-outline">
                     <span class="mdc-notched-outline__leading"></span>
                     <span class="mdc-notched-outline__notch">
-                        <span class="mdc-floating-label" id="label-id">Teacher ID</span>
+                        <span class="mdc-floating-label" id="label-id">Trainer ID</span>
                     </span>
                     <span class="mdc-notched-outline__trailing"></span>
                 </span>
                 <input type="text" class="mdc-text-field__input" aria-labelledby="label-id" 
-                       name="teacher_id" value="<%= teacher_id %>" readonly>
+                       name="trainer_id" value="<%= trainer_id %>" readonly>
             </label>
         </div>
 
@@ -102,12 +102,12 @@
                 <span class="mdc-notched-outline">
                     <span class="mdc-notched-outline__leading"></span>
                     <span class="mdc-notched-outline__notch">
-                        <span class="mdc-floating-label" id="label-name">Teacher Name</span>
+                        <span class="mdc-floating-label" id="label-name">Trainer Name</span>
                     </span>
                     <span class="mdc-notched-outline__trailing"></span>
                 </span>
                 <input type="text" class="mdc-text-field__input" aria-labelledby="label-name" 
-                       name="teacher_name" required>
+                       name="trainer_name" required>
             </label>
         </div>
 
@@ -130,32 +130,14 @@
                 <span class="mdc-notched-outline">
                     <span class="mdc-notched-outline__leading"></span>
                     <span class="mdc-notched-outline__notch">
-                        <span class="mdc-floating-label" id="label-date">Joined Date</span>
+                        <span class="mdc-floating-label" id="label-date">Status</span>
                     </span>
                     <span class="mdc-notched-outline__trailing"></span>
                 </span>
-                <input type="date" class="mdc-text-field__input" aria-labelledby="label-date" 
-                       name="joined_date" required>
+                <input type="text" class="mdc-text-field__input" aria-labelledby="label-date" 
+                       name="status" required>
             </label>
         </div>
-        
-        <div class="field-row">
-    <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--select">
-        <span class="mdc-notched-outline">
-            <span class="mdc-notched-outline__leading"></span>
-            <span class="mdc-notched-outline__notch">
-                <span class="mdc-floating-label" id="label-cluster">Cluster</span>
-            </span>
-            <span class="mdc-notched-outline__trailing"></span>
-        </span>
-        <select class="mdc-text-field__input" aria-labelledby="label-cluster" name="cluster" required>
-                <option value="" disabled selected></option>
-                <option value="Cluster A">Cluster A</option>
-                <option value="Cluster B">Cluster B</option>
-                <option value="Cluster C">Cluster C</option>
-             </select>
-         </label>
-      </div>
 
         <button class="mdc-button mdc-button--raised" type="submit">
             <span class="mdc-button__label">Update</span>

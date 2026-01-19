@@ -1,6 +1,5 @@
 package com.user;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,27 +13,41 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-
-@WebServlet("/EditTeacherServlet")
-public class EditTeacherServlet extends HttpServlet {
+import java.util.HashMap;
+import java.util.Map;
+@WebServlet("/TrainerSubjectDashboardServlet")
+public class TrainerSubjectDashboardServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
+    	
 
-        int teacherId = Integer.parseInt(req.getParameter("teacher_id"));
-        String name = req.getParameter("teacher_name");
-        String email = req.getParameter("email");
-        String joinedDate = req.getParameter("joined_date");
-        String cluster=req.getParameter("cluster");
-        
-        HttpSession session = req.getSession();
-        int school_id = (int) session.getAttribute("school_id");
+    	
+// starting of the code
+        HttpSession session = req.getSession(false);
+
+        if (session == null) {
+            res.sendRedirect("login.jsp");
+            return;
+        }
+
+        Integer school_id = (Integer) session.getAttribute("school_id");
         String school_name = (String) session.getAttribute("school_name");
+        Integer subject_id = (Integer) session.getAttribute("subject_id");
+        String subject_name = (String) session.getAttribute("subject_name");
+        
 
-        String classId = req.getParameter("classId");
-        String subject = req.getParameter("subject");
-        String subject_id = req.getParameter("subject_id");
+        if (school_id == null || school_name == null) {
+            res.sendRedirect("login.jsp");
+            return;
+        }
+
+        req.setAttribute("school_id", school_id);
+        req.setAttribute("school_name", school_name);
+        req.setAttribute("subject",subject_name);
+        req.setAttribute("subject_id", subject_id);
+
+        System.out.println(school_name + subject_name);
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -72,31 +85,43 @@ public class EditTeacherServlet extends HttpServlet {
             String connectedUser = meta.getUserName();
             System.out.println(">>> CONNECTED TO: " + connectedUrl); // Prints to Server Logs
 
-            String sql = "UPDATE teachers SET name=?, email=?, joined_date=?,cluster=? WHERE teacher_id=? and school_id=?";
+            String sql = "SELECT COUNT(*) FROM trainer_videos where subject=?";
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, subject_name);
+            ResultSet rs = ps.executeQuery();
 
-            ps.setString(1, name);
-            ps.setString(2, email);
-            ps.setString(3, joinedDate);
-            ps.setString(4,cluster);
-            ps.setInt(5, teacherId);
-            ps.setInt(6, school_id);
+            int totalVideos = 0;
+            if (rs.next()) {
+                totalVideos = rs.getInt(1);
+            }
+            req.setAttribute("totalVideos", totalVideos);
+            System.out.println(totalVideos);
+            
+            String sql1 = "SELECT COUNT(*) FROM notices where subject=?";
+            PreparedStatement ps1 = con.prepareStatement(sql1);
+            ps1.setString(1, subject_name);
+            ResultSet rs1 = ps1.executeQuery();
 
-            ps.executeUpdate();
+            int totalNotices = 0;
+            if (rs1.next()) {
+                totalNotices = rs1.getInt(1);
+            }
+            req.setAttribute("totalNotices", totalNotices);
+            System.out.println(totalNotices);
 
+            rs.close();
             ps.close();
+            rs1.close();
+            ps1.close();
+            
             con.close();
-
-            // ✅ Redirect back to ClassesServlet (BEST PRACTICE)
-            res.sendRedirect(
-                "ClassesServlet?classId=" + classId +
-                "&subject=" + subject +
-                "&subject_id=" + subject_id
-            );
-
+            
         } catch (Exception e) {
             e.printStackTrace();
-            res.getWriter().println("Database Error");
         }
+        //ending of the code
+        
+        
+        req.getRequestDispatcher("trainersubjectdashboard.jsp").forward(req,res);
     }
 }
